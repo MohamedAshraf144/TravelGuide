@@ -1,0 +1,105 @@
+﻿@model TravelGuide.Entiteis.Models.Flight
+
+@{
+    ViewData["Title"] = "DeleteFlight";
+    Layout = "_templateLayout";
+
+}
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Delete Flight</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Delete" enctype="multipart/form-data" id="contactForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="hidden" asp-for="FlightId" />
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Airline" name="Airline" id="Airline" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Airline'" placeholder='Enter the Airline'>
+                        <span asp-validation-for="Airline" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ArivalAirport" name="ArivalAirport" id="ArivalAirport" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Arrival Airport'" placeholder='Enter the Arrival Airport'>
+                        <span asp-validation-for="ArivalAirport" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="DepartureTime" name="DepartureTime" id="DepartureTime" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the DepartureTime'" placeholder='Enter the Departure Time'>
+                        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ArrivalTime" name="ArrivalTime" id="ArrivalTime" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Arrival Time'" placeholder='Enter the Arrival Time'>
+                        <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="TotalPrice" name="TotalPrice" id="TotalPrice" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Destination Country'" placeholder='Enter the flight Price'>
+                        <span asp-validation-for="TotalPrice" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select class="form-control" asp-for="LocationId" asp-items="ViewBag.Locations" disabled>
+                            <option value="">Select a location</option>
+                        </select>
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "Flight")'" >Cancel</button>
+                <button type="submit" value="Delete" class="button button-contactForm btn_1" style="background-color:#162b45;">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@* style for the file input *@
+<style>
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    .file-upload-label {
+        background-color: #fe5c24;
+        color: white;
+        padding: 10px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 5px;
+        transition: background-color 0.3s, border 0.3s;
+    }
+
+        .file-upload-label:hover {
+            background-color: #e54c1f;
+        }
+
+    .file-name {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .file-upload {
+        display: none;
+    }
+</style>

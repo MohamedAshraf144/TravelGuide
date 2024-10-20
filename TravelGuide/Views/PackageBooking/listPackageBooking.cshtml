@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TravelGuide.Entiteis.Models.PackageBooking>
+
+@{
+    ViewData["Title"] = "listPackageBooking";
+    Layout = "_templateLayout";
+
+}
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Package Bookings</h2>
+    </div>
+    <div class="col-lg-10 m-auto mb-10">
+        <table class="table table-striped">
+            <thead class="shadow" style="color: #0c3e72;">
+                <tr>
+                    <th class="text-center">
+                        Number of Guests
+                    </th>
+                    <th class="text-center">
+                        Travel Package
+                    </th>
+                    <th class="text-center">
+                        Booking Date
+                    </th>
+                    <th class="text-center">
+                        Booking Status
+                    </th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.NumberOfGuests)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.TravelPackage.Description)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.BookingDate)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.BookingStatus)
+                        </td>
+                        <td class="text-center">
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.BookingId" style="padding:5px 5px; color: #0c3e72;">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.BookingId" style="padding:5px 5px;color: #fe5b24d0;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

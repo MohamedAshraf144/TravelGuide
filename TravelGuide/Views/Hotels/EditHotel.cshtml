@@ -1,0 +1,126 @@
+@model TravelGuide.Entiteis.Models.Hotel
+
+@{
+    ViewData["Title"] = "EditHotel";
+    Layout = "_templateLayout";
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Edit Hotel</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Edit" enctype="multipart/form-data" id="contactForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input  asp-for="HotelId" hidden />
+                    <input  asp-for="LocationId" hidden />
+                    <div class="form-group">
+                        <input class="form-control" asp-for="HotelName" name="HotelName" id="HotelName" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the HotelName'" placeholder='Enter the Hotel Name'>
+                        <span asp-validation-for="HotelName" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="PhoneNumber" name="PhoneNumber" id="PhoneNumber" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the PhoneNumber'" placeholder='Enter the Phone Number'>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Email" name="Email" id="Email" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Email'" placeholder='Enter the Email'>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Rating" name="Rating" id="Rating" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Rating'" placeholder='Enter the Rating'>
+                        <span asp-validation-for="Rating" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+@*             <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input asp-for="@Model.ImageFile" class="form-control"  />
+                    </div>
+                </div>
+            </div> *@
+            <div class="col-12">
+                <div class="form-group mb-3">
+                    <div class="custom-file-upload">
+                        <label for="file-upload" class="file-upload-label">Choose File</label>
+                        <span id="file-name" class="file-name">
+
+                            @if (Model != null && !string.IsNullOrEmpty(Model.HotelImage))
+                            {
+                                @System.IO.Path.GetFileName(Model.HotelImage).Substring(System.IO.Path.GetFileName(Model.HotelImage).IndexOf('_') + 1)
+                                ;
+                            }
+                        </span>
+                        <input type="file" id="file-upload" asp-for="ImageFile" class="file-upload" onchange="updateFileName(this)" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "Hotels")'">Cancel</button>
+
+                <button type="submit" value="Edit" class="button button-contactForm btn_1" style="background-color:#162b45;">Edit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+}
+
+<style>
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    .file-upload-label {
+        background-color: #fe5c24;
+        color: white;
+        padding: 10px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 5px;
+        transition: background-color 0.3s, border 0.3s;
+    }
+
+        .file-upload-label:hover {
+            background-color: #e54c1f;
+        }
+
+    .file-name {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .file-upload {
+        display: none;
+    }
+</style>

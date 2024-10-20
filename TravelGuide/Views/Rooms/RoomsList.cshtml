@@ -1,0 +1,76 @@
+@model IEnumerable<TravelGuide.Entiteis.Models.Room>
+
+@{
+    ViewData["Title"] = "RoomsList";
+    Layout = "_templateLayout";
+
+}
+
+<body>
+    <section class="top_place section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="section_tittle text-center">
+                        <h2>Rooms</h2>
+                        <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged.</p>
+                        @{
+                            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <div class="m-auto text-center">
+                                    <a asp-action="Create" asp-controller="Rooms"
+                                       style="display: inline-block; padding: 10px 25px; color: #fff; background-color: #fe5c24; text-transform: capitalize; margin-top: 10px; ">
+                                        Add New Room
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-6 col-sm-8">
+                        <div class="single_place">
+                            <img src="@item.hotel.HotelImage" alt="NoImage" width="100%">
+                            <div class="hover_Text d-flex align-items-end justify-content-between">
+                                <div class="hover_text_iner">
+                                    
+                                    <a class="btn text-white" style="display: inline-block; padding: 10px 15px; background-color: #fe5c24; text-transform: capitalize; margin-top: 5px;" asp-controller="RoomBooking" asp-action="Create" asp- asp-route-RoomId="@item.RoomId">Book</a>
+
+                                    @{
+                                        if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                        {
+                                            <a class="btn text-white" style="display: inline-block; padding: 10px 15px; background-color: #fe5c24; text-transform: capitalize; margin-top: 5px;" asp-action="Edit" asp-route-Id="@item.RoomId">Edit</a>
+
+                                            <a class="btn text-white" style="display: inline-block; padding: 10px 15px; background-color: #fe5c24; text-transform: capitalize; margin-top: 5px;" asp-action="Delete" asp-route-Id="@item.RoomId">Delete</a>
+                                        }
+                                    }
+                                    <form class="d-flex" asp-action="Create" asp-controller="WatchlistItem" method="post">
+                                        <input type="hidden" name="ItemID" value="@item.RoomId" />
+                                        <input type="hidden" name="ItemType" value="Rooms" />
+                                        <input type="hidden" name="Image" value="@item.hotel.HotelImage" />
+                                        <input type="hidden" name="Name" value="@item.hotel.HotelName" />
+                                        @Html.AntiForgeryToken() <!-- To prevent CSRF attacks -->
+                                        <button type="submit" class="btn text-white" style="display: inline-block; padding: 10px 15px; background-color: #fe5c24; text-transform: capitalize; margin-top: 5px;">Add to Watchlist</button>
+                                    </form>
+
+                                    <h3 class="text-white">@item.hotel.HotelName </h3><br />
+                                    <h4 class="text-white">@item.RoomType - @item.PricePerNight $</h4>
+                                    <h4 class="text-white">Number: @item.RoomNumber</h4>
+                                    <h4 class="text-white">Number of Guests: @item.Capacity</h4><br />
+                                        
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+    </section>
+</body>

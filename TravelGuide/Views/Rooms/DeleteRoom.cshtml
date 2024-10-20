@@ -1,0 +1,75 @@
+@model TravelGuide.Entiteis.Models.Room
+
+@{
+    ViewData["Title"] = "DeleteRoom";
+    Layout = "_templateLayout";
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Delete Room</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Delete" enctype="multipart/form-data" id="contactForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="hidden" asp-for="RoomId" />
+                    <div class="form-group">
+                        <select asp-for="hotelId" asp-items="@(new SelectList(Model.HotelList, "HotelId", "HotelName"))" class="form-control" disabled>
+
+                            <option value="-1">Select a Hotel</option>
+
+                        </select>
+
+                        <span asp-validation-for="hotelId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="RoomNumber" name="RoomNumber" id="RoomNumber" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the RoomNumber'" placeholder='Enter the Room Number'>
+                        <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="RoomType" name="RoomType" id="RoomType" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the RoomType'" placeholder='Enter the Room Type'>
+                        <span asp-validation-for="RoomType" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="PricePerNight" name="PricePerNight" id="PricePerNight" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the PricePerNight'" placeholder='Enter the Price Per Night'>
+                        <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Capacity" name="Capacity" id="Capacity" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Capacity'" placeholder='Enter the Capacity'>
+                        <span asp-validation-for="Capacity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Availability" /> @Html.DisplayNameFor(model => model.Availability)
+                        </label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "Rooms")'">Cancel</button>
+                <button type="submit" value="Delete" class="button button-contactForm btn_1" style="background-color:#162b45;">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

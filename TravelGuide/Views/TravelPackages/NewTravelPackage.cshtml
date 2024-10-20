@@ -1,0 +1,179 @@
+@model TravelGuide.Entiteis.Models.TravelPackage
+
+@{
+    ViewData["Title"] = "NewTravelPackage";
+    Layout = "_templateLayout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Create Travel Package</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Create" method="post" enctype="multipart/form-data" id="travelPackageForm">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="PackageName" name="PackageName" id="PackageName" type="text" placeholder='Enter the Package Name'>
+                        <span asp-validation-for="PackageName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Description" name="Description" id="Description" type="text" placeholder='Enter the Description'>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select class="form-control" asp-for="DestinationId" asp-items="ViewBag.Locations">
+                            <option value="-1">Select a Destination</option>
+                        </select>
+                        <span asp-validation-for="DestinationId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Price" name="Price" id="Price" type="text" placeholder='Enter the Price'>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Updated StartDate input -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label">Start Date</label>
+                        <input class="form-control" asp-for="StartDate" name="StartDate" id="StartDate" type="date" placeholder='Select Start Date'>
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Updated EndDate input -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label">End Date</label>
+                        <input class="form-control" asp-for="EndDate" name="EndDate" id="EndDate" type="date" placeholder='Select End Date'>
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Updated MaxGuests input -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="MaxGuests" name="MaxGuests" id="MaxGuests" type="number" min="1" max="100" placeholder='Enter Max Guests'>
+                        <span asp-validation-for="MaxGuests" class="text-danger"></span>
+                    </div>
+                </div>
+                <!-- Updated Rating input (slider) -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="Rating">Rating </label>
+                        <input class="form-control-range" asp-for="Rating" name="Rating" id="Rating" type="range" min="1" max="5" step="0.5" value="3">
+                        <span asp-validation-for="Rating" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12">
+
+                    <div class="form-group mb-3">
+                        <input type="file" id="file-upload" asp-for="ImageFile" class="file-upload"  />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group mb-3 text-right">
+                    <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "TravelPackages")'">Cancel</button>
+                <button type="submit" value="create" class="button button-contactForm btn_1" style="background-color:#162b45;">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    debugger
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+</script>
+<style>
+    .file-upload {
+        display: inline-block;
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+        .file-upload:focus {
+            border-color: #fe5c24;
+            outline: none;
+        }
+
+        .file-upload::-webkit-file-upload-button {
+            display: none;
+        }
+
+        .file-upload::before {
+            content: 'Choose File';
+            display: inline-block;
+            padding: 10px 12px;
+            border: 1px solid #fe5c24;
+            border-radius: 5px;
+            background-color: #fe5c24;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, border 0.3s;
+            margin-right: 5px;
+        }
+
+        .file-upload:hover::before {
+            background-color: #fe5c24;
+            border-color: #fe5c24;
+        }
+
+    
+        input[type="range"] {
+            -webkit-appearance: none; 
+            appearance: none;
+            width: 100%;
+            height: 8px; 
+            background: #ddd; 
+            border-radius: 50px; 
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #fe5c24; 
+            border-radius: 100%;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            background: linear-gradient(to right, #fe5b24be, #ddd); 
+            border-radius: 50px; 
+        }
+        input[type="range"]::-ms-track {
+            width: 100%;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+       
+      
+
+   
+</style>
+

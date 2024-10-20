@@ -1,0 +1,31 @@
+@model TravelGuide.Entiteis.Models.WatchlistItem
+
+@{
+    ViewData["Title"] = "DeleteWatchlist";
+    Layout = "_templateLayout";
+}
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Delete</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Delete" enctype="multipart/form-data" id="contactForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <input type="hidden" asp-for="WatchlistItemId" />
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ItemType" name="ItemType" id="ItemType" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the ItemType'>
+                        <span asp-validation-for="ItemType" class="text-danger"disabled></span>
+                    </div>
+                </div>
+              </div>
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "WatchlistItem")'">Cancel</button>
+                <button type="submit" value="Delete" class="button button-contactForm btn_1" style="background-color:#162b45;">Delete</button>
+            </div>
+        </form>
+     </div>
+
+    </div>
+</div>

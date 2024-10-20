@@ -1,0 +1,66 @@
+﻿@model IEnumerable<TravelGuide.Entiteis.Models.WatchlistItem>
+
+@{
+    ViewData["Title"] = "WatchlistList";
+    Layout = "_templateLayout";
+}
+
+<body>
+    <section class="top_place section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="section_tittle text-center">
+                        <h2>Watchlist</h2>
+                        <p>Keep track of your favorite items by adding them to your watchlist and easily manage them.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model)
+                {
+@*                     <div class="col-lg-8 col-md-8 m-auto mb-4">
+                      
+                        <div class="single_place p-4 border rounded mb-3">
+                            <div class="watchlist-item-info">
+                                <h3>@item.ItemType</h3>
+                                <p><strong>Details:</strong> Press View details to preview the @item.ItemType</p>
+                            </div>
+                        </div>
+                       
+                        <div class="actions text-center">
+                            <a class="btn btn-info btn-sm mx-2" asp-action="Details" asp-route-id="@item.ItemID" asp-controller="@item.ItemType">View Details</a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a class="btn btn-warning btn-sm mx-2" asp-action="Edit" asp-route-id="@item.WatchlistItemId">Edit</a>
+                                <a class="btn btn-danger btn-sm mx-2" asp-action="Delete" asp-route-id="@item.WatchlistItemId">Delete</a>
+                            }
+                        </div>
+                    </div> *@
+
+                    <div class="col-lg-6 col-md-6 m-auto">
+                        <div class="single_place">
+                            <img src="@item.Image" alt="NoImage" width="100%">
+                            <div class="hover_Text d-flex align-items-end justify-content-between">
+                                <div class="hover_text_iner">
+                                    <div class="flex-row">
+                                        <h3 class="mb-2">@item.ItemType @item.Name</h3>
+                                        <form asp-action="Delete" asp-route-id="@item.WatchlistItemId" method="post" class="d-inline">
+                                            <button type="submit" class="place_btn btn btn-danger">Delete</button>
+                                        </form>
+
+                                        <a class="place_btn btn btn-secondary" asp-action="Details" asp-route-id="@item.ItemID" asp-controller="@item.ItemType">Details</a>
+
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+</body>

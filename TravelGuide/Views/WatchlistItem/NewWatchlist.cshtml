@@ -1,0 +1,49 @@
+﻿@model TravelGuide.Entiteis.Models.WatchlistItem
+
+@{
+    ViewData["Title"] = "NewWatchlist";
+    Layout = "_templateLayout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Create Watchlist Item</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Create" id="contactForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ItemID" name="ItemID" id="ItemID" type="text"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Item ID'"
+                               placeholder='Enter the Item ID'>
+                        <span asp-validation-for="ItemID" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ItemType" name="ItemType" id="ItemType" type="text"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Item Type'"
+                               placeholder='Enter the Item Type'>
+                        <span asp-validation-for="ItemType" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3 text-right">
+                <button type="submit" value="create" class="button button-contactForm btn_1">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

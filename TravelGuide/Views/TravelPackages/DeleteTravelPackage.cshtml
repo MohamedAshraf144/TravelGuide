@@ -1,0 +1,141 @@
+﻿@model TravelGuide.Entiteis.Models.TravelPackage
+
+@{
+    ViewData["Title"] = "DeleteTravelPackage";
+    Layout = "_templateLayout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Delete Travel Package</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Delete" enctype="multipart/form-data" id="contactForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="hidden" asp-for="PackageId" />
+                    <div class="form-group">
+                        <input class="form-control" asp-for="PackageName" name="PackageName" id="PackageName" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Package Name'" placeholder='Enter the Package Name'>
+                        <span asp-validation-for="PackageName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Description" name="Description" id="Description" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Description'" placeholder='Enter the Description'>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Price" name="Price" id="Price" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Price'" placeholder='Enter the Price'>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Duration" name="Duration" id="Duration" type="text" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Duration'" placeholder='Enter the Duration'>
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="StartDate" name="StartDate" id="StartDate" type="date" disabled>
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="EndDate" name="EndDate" id="EndDate" type="date" disabled>
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="MaxGuests" name="MaxGuests" id="MaxGuests" type="number" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Max Guests'" placeholder='Enter the Max Guests'>
+                        <span asp-validation-for="MaxGuests" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="Rating" name="Rating" id="Rating" type="number" step="0.1" disabled onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Rating'" placeholder='Enter the Rating'>
+                        <span asp-validation-for="Rating" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group mb-3">
+                        <div class="custom-file-upload">
+                            <label for="file-upload" class="file-upload-label">Choose File</label>
+                            <span id="file-name" class="file-name">
+
+                                @if (Model != null && !string.IsNullOrEmpty(Model.PackageImage))
+                                {
+                                    @System.IO.Path.GetFileName(Model.PackageImage).Substring(System.IO.Path.GetFileName(Model.PackageImage).IndexOf('_') + 1)
+                                    ;
+                                }
+                            </span>
+                            <input type="file" id="file-upload" asp-for="ImageFile" class="file-upload" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "TravelPackages")'" >Cancel</button>
+                <button type="submit" value="Delete" class="button button-contactForm btn_1" style="background-color:#162b45;">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@* style for the file input *@
+<style>
+    .custom-file-upload {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+    }
+
+    .file-upload-label {
+        background-color: #fe5c24;
+        color: white;
+        padding: 10px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-top: 5px;
+        transition: background-color 0.3s, border 0.3s;
+    }
+
+        .file-upload-label:hover {
+            background-color: #e54c1f;
+        }
+
+    .file-name {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .file-upload {
+        display: none;
+    }
+</style>

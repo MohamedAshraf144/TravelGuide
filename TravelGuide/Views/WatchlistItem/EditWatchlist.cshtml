@@ -1,0 +1,46 @@
+@model TravelGuide.Entiteis.Models.WatchlistItem
+
+@{
+    ViewData["Title"] = "EditWatchlist";
+    Layout = "_templateLayout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Edit Watchlist Item</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Edit" enctype="multipart/form-data" id="contactForm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="ItemID" class="control-label"></label>
+                        <input asp-for="ItemID" class="form-control" />
+                        <span asp-validation-for="ItemID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label asp-for="ItemType" class="control-label"></label>
+                        <input asp-for="ItemType" class="form-control" />
+                        <span asp-validation-for="ItemType" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" asp-for="WatchlistItemId" />
+            <div class="form-group mb-3 text-right flex flex-row">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "WatchListItem")'">Cancel</button>
+
+                <button type="submit" value="Edit" class="button button-contactForm btn_1" style="background-color:#162b45;">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,44 @@
+﻿@model TravelGuide.Entiteis.Models.RoomBooking
+
+@{
+    ViewData["Title"] = "New Room Booking";
+    Layout = "_templateLayout";
+
+}
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Confirm Flight Booking</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Create" id="contactForm">
+            <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="RoomId" hidden />
+                <input  asp-for="HotelId" hidden/>
+                <input  asp-for="BookingStatus" hidden />
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ChickInDate" name="ChickInDate" id="ChickInDate" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Chick In Date'" placeholder='Enter the Chick In Date'>
+                        <span asp-validation-for="ChickInDate" class="text-danger"></span>
+                    </div>
+                </div><div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="ChickOutDate" name="ChickOutDate" id="ChickOutDate" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the Chick Out Date'" placeholder='Enter the Chick Out Date'>
+                        <span asp-validation-for="ChickOutDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group mb-3 text-right">
+                    <button type="submit" value="create" class="button button-contactForm btn_1">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

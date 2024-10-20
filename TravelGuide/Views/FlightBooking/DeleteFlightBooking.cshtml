@@ -1,0 +1,58 @@
+﻿@model TravelGuide.Entiteis.Models.FlightBooking
+
+@{
+    ViewData["Title"] = "DeleteFlightBooking";
+    Layout = "_templateLayout";
+
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="contact-title text-center m-5 text-italic">Delete Flight Booking</h2>
+    </div>
+    <div class="col-lg-8 m-auto">
+        <form class="form-contact contact_form" asp-action="Delete">
+            <div class="row">
+                <input asp-for="BookingId" class="form-control" hidden />
+                <input asp-for="FlightId" class="form-control" hidden />
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="SeatNumber" class="control-label"></label>
+                        <select asp-for="SeatNumber" class="form-control" disabled>
+                            <option value="@Model.SeatNumber" selected>@Model.SeatNumber</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label asp-for="Class" class="control-label"></label>
+                        <select asp-for="Class" class="form-control" disabled>
+                            <option value="@Model.Class" selected>@Model.Class</option>
+                            @if (Model.Class != "Economy")
+                            {
+                                <option value="Economy">Economy</option>
+
+                            }
+                            else
+                            {
+                                <option value="First Class">First Class</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <input class="form-control" asp-for="BookingDate" name="BookingDate" id="BookingDate" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the DepartureTime'" placeholder='Enter the Booking Date' disabled>
+                        <span asp-validation-for="BookingDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <input class="form-check-input" asp-for="BookingStatus" hidden />
+            </div>
+            <div class="form-group mb-3 text-right">
+                <button type="button" class="button button-contactForm btn_1" onclick="window.location='@Url.Action("Index", "FlightBooking")'" >Cancel</button>
+                <button type="submit" value="Delete" class="button button-contactForm btn_1" style="background-color:#162b45;">Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
