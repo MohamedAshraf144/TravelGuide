@@ -68,12 +68,7 @@ For an in-depth overview and visual walkthrough of the **Travel Guide** project,
 
 ---
 
-## Contributors
-- [Aya Ali](https://github.com/AyaA1i)
-- [Nada Ali](https://github.com/Nada125)
-- [Ebraheem AbdelAziz](https://github.com/EbraheemAbdelAziz)
-- [Abdulrahman Sameer](https://github.com/Abdelrahman232323)
-- [Mohamed Ashraf](https://github.com/MohamedAshraf144)
+
 
 
 
